@@ -1,3 +1,6 @@
+import { useEffect, } from "react";
+import { usePuterStore } from "~/lib/puter";
+
 import {
   isRouteErrorResponse,
   Links,
@@ -24,6 +27,12 @@ export const links: Route.LinksFunction = () => [
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
+
+const { init } = usePuterStore();
+
+useEffect(() => {
+    init();
+}, [init]);  
   return (
     <html lang="en">
       <head>
@@ -32,6 +41,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
+      <script src="https://js.puter.com/v2/"></script>
       <body>
         {children}
         <ScrollRestoration />
